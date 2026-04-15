@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import AuthLayout from "../../components/layout/AuthLayout";
 import { loginUser, getProfile } from "../../auth/authService";
 import { useAuthStore } from "../../store/authStore";
+import SocialLoginButtons from "../../components/auth/SocialLoginButtons";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function Login() {
 
       toast.success("Login successful");
 
-      navigate("/profile");
+      navigate("/profile", { replace: true });
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Invalid credentials");
     } finally {
@@ -89,6 +90,9 @@ export default function Login() {
           {loading ? "Signing in..." : "Login"}
         </button>
       </form>
+      <div className="my-6 text-center text-slate-400">OR</div>
+
+      <SocialLoginButtons />
 
       <div className="mt-4 text-center text-sm">
         <Link to="/forgot-password" className="text-yellow-700 hover:underline">

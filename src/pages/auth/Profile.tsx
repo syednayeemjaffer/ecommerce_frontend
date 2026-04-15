@@ -23,13 +23,17 @@ export default function Profile() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-4">
-          My Profile
-        </h1>
+        <h1 className="text-2xl font-bold mb-4">My Profile</h1>
 
-        <p><strong>Name:</strong> {user?.name}</p>
-        <p><strong>Email:</strong> {user?.email}</p>
-        <p><strong>Role:</strong> {user?.role}</p>
+        <p>
+          <strong>Name:</strong> {user?.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {user?.email}
+        </p>
+        <p>
+          <strong>Role:</strong> {user?.role}
+        </p>
 
         <button
           onClick={handleLogout}
@@ -37,6 +41,24 @@ export default function Profile() {
         >
           Logout
         </button>
+
+        <div className="space-y-3 mt-6">
+          <button
+            onClick={() => navigate("/change-password")}
+            className="w-full border py-3 rounded-xl"
+          >
+            Change Password
+          </button>
+
+          {user?.role === "ADMIN" && (
+            <button
+              onClick={() => navigate("/admin/users")}
+              className="w-full border py-3 rounded-xl"
+            >
+              Manage Users
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

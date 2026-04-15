@@ -35,3 +35,59 @@ export const registerUser = async (formData: FormData) => {
 
   return res.data;
 };
+
+export const forgotPasswordOtp = async (email: string) => {
+  const res = await authApi.post("/forgot-password", {
+    email,
+  });
+  return res.data;
+};
+
+export const resetPassword = async (
+  email: string,
+  otp: string,
+  newPassword: string
+) => {
+  const res = await authApi.post("/reset-password", {
+    email,
+    otp,
+    newPassword,
+  });
+
+  return res.data;
+};
+
+export const changePassword = async (
+  token: string,
+  oldPassword: string,
+  newPassword: string
+) => {
+  const res = await authApi.post(
+    "/change-password",
+    { oldPassword, newPassword },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res.data;
+};
+
+export const getAllUsers = async (
+  token: string
+) => {
+  const res = await authApi.get("/users", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
+};
+
+export const refreshAccessToken = async () => {
+  const res = await authApi.post("/refresh");
+  return res.data;
+};
