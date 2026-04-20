@@ -22,7 +22,7 @@ export default function SessionInitializer({
 
         setAccessToken(token);
 
-        const profile = await getProfile(token);
+        const profile = await getProfile();
 
         setUser(profile.user || profile);
       } catch {

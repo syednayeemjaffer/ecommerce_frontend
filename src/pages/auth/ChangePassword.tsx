@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import AuthLayout from "../../components/layout/AuthLayout";
-import { useAuthStore } from "../../store/authStore";
 import { changePassword } from "../../auth/authService";
 import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
 
-  const token = useAuthStore(
-    (s) => s.accessToken
-  );
 
   const [form, setForm] = useState({
     oldPassword: "",
@@ -41,15 +37,11 @@ export default function ChangePassword() {
       return toast.error("Passwords do not match");
     }
 
-    if (!token) {
-      return toast.error("Unauthorized");
-    }
 
     setLoading(true);
 
     try {
       await changePassword(
-        token,
         form.oldPassword,
         form.newPassword
       );

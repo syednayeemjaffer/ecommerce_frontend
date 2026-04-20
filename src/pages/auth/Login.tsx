@@ -37,7 +37,7 @@ export default function Login() {
 
       setAccessToken(token);
 
-      const profile = await getProfile(token);
+      const profile = await getProfile();
 
       setUser(profile.user || profile);
 

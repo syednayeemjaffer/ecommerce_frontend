@@ -28,7 +28,7 @@ export default function OAuthCallback() {
 
         setAccessToken(token);
 
-        const profile = await getProfile(token);
+        const profile = await getProfile();
 
         setUser(profile.user || profile);
 

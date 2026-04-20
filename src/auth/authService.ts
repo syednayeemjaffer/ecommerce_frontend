@@ -5,12 +5,8 @@ export const loginUser = async (email: string, password: string) => {
   return res.data;
 };
 
-export const getProfile = async (token: string) => {
-  const res = await authApi.get("/user", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getProfile = async () => {
+  const res = await authApi.get("/user");
   return res.data;
 };
 
@@ -58,32 +54,19 @@ export const resetPassword = async (
 };
 
 export const changePassword = async (
-  token: string,
   oldPassword: string,
   newPassword: string
 ) => {
-  const res = await authApi.post(
-    "/change-password",
-    { oldPassword, newPassword },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await authApi.post("/change-password", {
+    oldPassword,
+    newPassword,
+  });
 
   return res.data;
 };
 
-export const getAllUsers = async (
-  token: string
-) => {
-  const res = await authApi.get("/users", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+export const getAllUsers = async () => {
+  const res = await authApi.get("/users");
   return res.data;
 };
 

@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../../store/authStore";
 import { getAllUsers } from "../../auth/authService";
 
 export default function AdminUsers() {
-  const token = useAuthStore(
-    (s) => s.accessToken
-  );
 
   const [users, setUsers] = useState<any[]>(
     []
@@ -13,9 +9,7 @@ export default function AdminUsers() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      if (!token) return;
-
-      const data = await getAllUsers(token);
+      const data = await getAllUsers();
       setUsers(data.users || data);
     };
 
